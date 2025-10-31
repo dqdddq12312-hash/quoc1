@@ -3,10 +3,16 @@ import fb_posting
 import os
 from werkzeug.utils import secure_filename
 
+# Get the absolute path of the current directory
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
 
-app = Flask(__name__)
+# Create the Flask app with explicit template folder
+app = Flask(__name__, template_folder=TEMPLATE_DIR)
 app.secret_key = 'your_secret_key'
-UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
+
+# Ensure upload directory exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
